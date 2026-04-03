@@ -1,4 +1,4 @@
-# Portfolio Profesional — Infraestructura, Redes & Ciberseguridad
+# Portfolio Profesional — Infraestructura, Redes & Herramientas
 
 > **Documentación Activa** · Este repositorio contiene la infraestructura como código (IaC) y la base estructural de un portfolio enfocado estrictamente en la administración de sistemas, seguridad y arquitecturas de red.
 
