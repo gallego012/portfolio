@@ -1,0 +1,412 @@
+---
+// Hero.astro — Sección principal con estética terminal
+---
+
+<section class="hero" id="inicio" aria-label="Sección principal">
+  <!-- Decorative background glow -->
+  <div class="hero-glow hero-glow--left" aria-hidden="true"></div>
+  <div class="hero-glow hero-glow--right" aria-hidden="true"></div>
+
+  <div class="container hero-container">
+    <!-- Terminal prompt header -->
+    <div class="terminal-prompt" aria-label="Prompt de terminal">
+      <span class="prompt-user">root</span>
+      <span class="prompt-at">@</span>
+      <span class="prompt-host">nexus</span>
+      <span class="prompt-sep">:</span>
+      <span class="prompt-dir">~</span>
+      <span class="prompt-hash">#</span>
+      <span class="prompt-cmd"> whoami</span>
+      <span class="prompt-cursor" aria-hidden="true">▌</span>
+    </div>
+
+    <!-- Hero content -->
+    <div class="hero-content">
+      <p class="hero-greeting mono">
+        <span class="greeting-output">→</span> Hola, soy
+      </p>
+
+      <h1 class="hero-name">
+        Cristian <span class="hero-name--accent">Gallego</span>
+      </h1>
+
+      <h2 class="hero-title">
+        Técnico en Sistemas<br />
+        <span class="hero-title--highlight">Microinformáticos y Redes</span>
+      </h2>
+
+      <p class="hero-description">
+        Enfocado en la <strong>gestión segura de sistemas</strong>, la
+        <strong>automatización de infraestructura</strong> y la importancia de la
+        documentación técnica precisa. Este portfolio es mi documentación viva:
+        laboratorios reales, scripts auditados y arquitecturas desplegadas en
+        producción.
+      </p>
+
+      <!-- Terminal output block -->
+      <div class="terminal-block" role="region" aria-label="Información técnica en formato terminal">
+        <div class="terminal-header">
+          <span class="terminal-dot terminal-dot--red"></span>
+          <span class="terminal-dot terminal-dot--yellow"></span>
+          <span class="terminal-dot terminal-dot--green"></span>
+          <span class="terminal-title">info.sh</span>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-line">
+            <span class="term-key">ROL</span>
+            <span class="term-sep">:</span>
+            <span class="term-val">SysAdmin · Net Architect · SecOps</span>
+          </div>
+          <div class="terminal-line">
+            <span class="term-key">STACK</span>
+            <span class="term-sep">:</span>
+            <span class="term-val">Bash · Docker · Git · Cloudflare</span>
+          </div>
+          <div class="terminal-line">
+            <span class="term-key">STATUS</span>
+            <span class="term-sep">:</span>
+            <span class="term-val term-status">
+              <span class="status-dot" aria-hidden="true"></span>
+              Disponible para colaborar
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="hero-cta" role="group" aria-label="Acciones principales">
+        <a href="#labs" class="btn btn--primary" id="hero-cta-labs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+          </svg>
+          Ver Documentación / Labs
+        </a>
+        <a href="#contacto" class="btn btn--secondary" id="hero-cta-contact">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          Contactar
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <span class="scroll-text mono">scroll</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 100px 0 60px;
+  }
+
+  .hero-container {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Background glows */
+  .hero-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+  }
+
+  .hero-glow--left {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0, 128, 255, 0.08) 0%, transparent 70%);
+    top: -100px;
+    left: -200px;
+  }
+
+  .hero-glow--right {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(100, 255, 218, 0.06) 0%, transparent 70%);
+    top: 50%;
+    right: -200px;
+    transform: translateY(-50%);
+  }
+
+  /* Terminal prompt */
+  .terminal-prompt {
+    font-family: var(--font-mono);
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    animation: fadeIn 0.6s ease forwards;
+  }
+
+  .prompt-user { color: #7ec8e3; }
+  .prompt-at { color: var(--text-secondary); }
+  .prompt-host { color: var(--green-bright); }
+  .prompt-sep { color: var(--text-secondary); }
+  .prompt-dir { color: #c792ea; }
+  .prompt-hash { color: var(--text-secondary); margin-left: 4px; }
+  .prompt-cmd { color: var(--text-primary); margin-left: 6px; }
+  .prompt-cursor {
+    color: var(--green-bright);
+    animation: blink 1.1s step-end infinite;
+    margin-left: 2px;
+  }
+
+  /* Hero content */
+  .hero-content {
+    max-width: 760px;
+    animation: slideUp 0.8s ease forwards;
+  }
+
+  .hero-greeting {
+    font-size: 1rem;
+    color: var(--green-bright);
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  .greeting-output {
+    color: var(--text-muted);
+    margin-right: 6px;
+  }
+
+  .hero-name {
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-weight: 900;
+    color: var(--text-bright);
+    line-height: 1.05;
+    margin-bottom: 8px;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-name--accent {
+    color: var(--green-bright);
+  }
+
+  .hero-title {
+    font-size: clamp(1.3rem, 3.5vw, 2rem);
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.35;
+    margin-bottom: 28px;
+  }
+
+  .hero-title--highlight {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .hero-description {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.85;
+    max-width: 600px;
+    margin-bottom: 36px;
+  }
+
+  .hero-description strong {
+    color: var(--green-bright);
+    font-weight: 500;
+  }
+
+  /* Terminal block */
+  .terminal-block {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 40px;
+    max-width: 520px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(100, 255, 218, 0.05);
+    transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .terminal-block:hover {
+    border-color: var(--border-accent);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(100, 255, 218, 0.08);
+  }
+
+  .terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  .terminal-dot--red { background: #ff5f57; }
+  .terminal-dot--yellow { background: #ffbd2e; }
+  .terminal-dot--green { background: #28c840; }
+
+  .terminal-title {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-left: auto;
+    margin-right: auto;
+    letter-spacing: 0.05em;
+  }
+
+  .terminal-body {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .terminal-line {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+  }
+
+  .term-key {
+    color: var(--green-bright);
+    min-width: 80px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+  }
+
+  .term-sep {
+    color: var(--text-muted);
+    margin: 0 12px 0 4px;
+  }
+
+  .term-val {
+    color: var(--text-primary);
+  }
+
+  .term-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--green-bright);
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green-bright);
+    box-shadow: 0 0 8px var(--green-bright);
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* CTA Buttons */
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn--primary {
+    background: var(--green-bright);
+    color: var(--bg-void);
+    font-weight: 700;
+    box-shadow: 0 0 0 rgba(100, 255, 218, 0);
+  }
+
+  .btn--primary:hover {
+    background: #7fffd4;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(100, 255, 218, 0.35);
+  }
+
+  .btn--secondary {
+    background: transparent;
+    color: var(--green-bright);
+    border: 1px solid var(--green-bright);
+  }
+
+  .btn--secondary:hover {
+    background: var(--green-dim);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(100, 255, 218, 0.15);
+  }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    right: clamp(20px, 5vw, 40px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    opacity: 0.5;
+  }
+
+  @media (max-width: 640px) {
+    .scroll-indicator {
+      display: none;
+    }
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, var(--green-bright), transparent);
+    animation: scanline 2s ease-in-out infinite;
+  }
+
+  .scroll-text {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    letter-spacing: 0.2em;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: 120px 0 80px;
+    }
+  }
+</style>

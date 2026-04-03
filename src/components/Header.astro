@@ -1,0 +1,327 @@
+---
+// Header.astro — Navigation sticky with glassmorphism
+---
+
+<header id="main-header" class="site-header">
+  <div class="header-container">
+    <!-- Logo / Brand -->
+    <a href="#inicio" class="header-logo" id="header-logo-link" aria-label="Volver al inicio">
+      <span class="logo-bracket">[</span>
+      <span class="logo-text">root<span class="logo-at">@</span>nexus</span>
+      <span class="logo-bracket">]</span>
+      <span class="logo-cursor" aria-hidden="true">_</span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="header-nav" role="navigation" aria-label="Navegación principal">
+      <ul class="nav-list" role="list">
+        <li class="nav-item">
+          <a href="#inicio" class="nav-link" id="nav-inicio">
+            <span class="nav-num">01</span>
+            Inicio
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#experiencia" class="nav-link" id="nav-experiencia">
+            <span class="nav-num">02</span>
+            Experiencia
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#labs" class="nav-link" id="nav-labs">
+            <span class="nav-num">03</span>
+            Labs
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#stack" class="nav-link" id="nav-stack">
+            <span class="nav-num">04</span>
+            Stack
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#contacto" class="nav-link nav-link--cta" id="nav-contacto">
+            Contactar
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Mobile menu toggle -->
+    <button
+      class="mobile-toggle"
+      id="mobile-menu-toggle"
+      aria-label="Abrir menú de navegación"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span class="toggle-bar"></span>
+      <span class="toggle-bar"></span>
+      <span class="toggle-bar"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú móvil">
+    <nav aria-label="Navegación móvil">
+      <ul class="mobile-nav-list" role="list">
+        <li><a href="#inicio" class="mobile-nav-link" id="mobile-nav-inicio"><span class="nav-num">01</span> Inicio</a></li>
+        <li><a href="#experiencia" class="mobile-nav-link" id="mobile-nav-experiencia"><span class="nav-num">02</span> Experiencia</a></li>
+        <li><a href="#labs" class="mobile-nav-link" id="mobile-nav-labs"><span class="nav-num">03</span> Labs</a></li>
+        <li><a href="#stack" class="mobile-nav-link" id="mobile-nav-stack"><span class="nav-num">04</span> Stack Técnico</a></li>
+        <li><a href="#contacto" class="mobile-nav-link mobile-nav-link--cta" id="mobile-nav-contacto">Contactar</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: all var(--transition-normal);
+  }
+
+  .site-header.scrolled {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--border-subtle);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 40px);
+    height: 72px;
+  }
+
+  /* Logo */
+  .header-logo {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    display: flex;
+    align-items: center;
+    gap: 0;
+    letter-spacing: -0.01em;
+    transition: color var(--transition-fast);
+  }
+
+  .header-logo:hover {
+    color: var(--green-bright);
+  }
+
+  .logo-bracket {
+    color: var(--green-bright);
+    font-size: 1.2rem;
+  }
+
+  .logo-text {
+    padding: 0 4px;
+  }
+
+  .logo-at {
+    color: var(--green-bright);
+  }
+
+  .logo-cursor {
+    color: var(--green-bright);
+    animation: blink 1.2s step-end infinite;
+    margin-left: 2px;
+  }
+
+  /* Desktop nav */
+  .header-nav {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .header-nav {
+      display: block;
+    }
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+  }
+
+  .nav-link {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    padding: 8px 14px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all var(--transition-fast);
+    position: relative;
+  }
+
+  .nav-link:hover {
+    color: var(--green-bright);
+    background: var(--green-dim);
+  }
+
+  .nav-num {
+    color: var(--green-bright);
+    font-size: 0.72rem;
+    opacity: 0.7;
+  }
+
+  .nav-link--cta {
+    color: var(--green-bright);
+    border: 1px solid var(--green-bright);
+    padding: 8px 18px;
+    margin-left: 8px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+    transition: all var(--transition-normal);
+    box-shadow: 0 0 0 rgba(100, 255, 218, 0);
+  }
+
+  .nav-link--cta:hover {
+    background: var(--green-dim);
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.2);
+    transform: translateY(-1px);
+  }
+
+  /* Mobile toggle */
+  .mobile-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background var(--transition-fast);
+  }
+
+  @media (min-width: 768px) {
+    .mobile-toggle {
+      display: none;
+    }
+  }
+
+  .mobile-toggle:hover {
+    background: var(--green-dim);
+  }
+
+  .toggle-bar {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--green-bright);
+    border-radius: 2px;
+    transition: all var(--transition-normal);
+  }
+
+  .mobile-toggle.open .toggle-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .mobile-toggle.open .toggle-bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .mobile-toggle.open .toggle-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    display: none;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-top: 1px solid var(--border-subtle);
+    padding: 20px clamp(20px, 5vw, 40px) 30px;
+  }
+
+  .mobile-menu.open {
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    .mobile-menu {
+      display: none !important;
+    }
+  }
+
+  .mobile-nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mobile-nav-link {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 6px;
+    transition: all var(--transition-fast);
+  }
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link:focus {
+    color: var(--green-bright);
+    background: var(--green-dim);
+  }
+
+  .mobile-nav-link--cta {
+    color: var(--green-bright);
+    border: 1px solid var(--border-accent);
+    margin-top: 8px;
+    justify-content: center;
+  }
+</style>
+
+<script>
+  const header = document.getElementById('main-header');
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  // Sticky scroll effect
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+  });
+
+  // Mobile menu toggle
+  toggle?.addEventListener('click', () => {
+    const isOpen = mobileMenu?.classList.contains('open');
+    mobileMenu?.classList.toggle('open');
+    toggle.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  // Close mobile menu on link click
+  mobileMenu?.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      toggle?.classList.remove('open');
+      toggle?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>

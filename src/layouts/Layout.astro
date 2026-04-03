@@ -1,23 +1,600 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+const {
+  title = "Portfolio — Infraestructura, Redes & Ciberseguridad",
+  description = "Especialista en Infraestructura IT, Arquitectura de Redes y Ciberseguridad. Documentación técnica viva de laboratorios reales, scripting y despliegues CI/CD.",
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? "https://portfolio.example.com");
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Primary -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- External Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="es_ES" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Google Fonts — Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Global CSS -->
+    <style is:global>
+      :root {
+        /* Color System */
+        --bg-void: #020c1b;
+        --bg-deep: #0a192f;
+        --bg-surface: #112240;
+        --bg-elevated: #1a2f4a;
+        --bg-card: rgba(17, 34, 64, 0.7);
+
+        /* Accent Colors */
+        --green-matrix: #00ff41;
+        --green-bright: #64ffda;
+        --green-dim: rgba(100, 255, 218, 0.15);
+        --blue-electric: #0080ff;
+        --blue-pale: #a8b2d8;
+        --blue-navy: #0a192f;
+
+        /* Text */
+        --text-primary: #ccd6f6;
+        --text-secondary: #8892b0;
+        --text-muted: #4a5568;
+        --text-terminal: #00ff41;
+        --text-bright: #e6f1ff;
+
+        /* Borders */
+        --border-subtle: rgba(100, 255, 218, 0.1);
+        --border-accent: rgba(100, 255, 218, 0.3);
+        --border-glow: rgba(0, 255, 65, 0.4);
+
+        /* Glass */
+        --glass-bg: rgba(10, 25, 47, 0.85);
+        --glass-blur: blur(20px);
+
+        /* Typography */
+        --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+        --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+        /* Spacing */
+        --section-padding: clamp(80px, 10vw, 140px);
+        --container-max: 1100px;
+
+        /* Transitions */
+        --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Reset & Base */
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        scrollbar-color: var(--green-bright) var(--bg-deep);
+      }
+
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg-deep);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--green-bright);
+        border-radius: 3px;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        background-color: var(--bg-void);
+        color: var(--text-primary);
+        line-height: 1.7;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Selection */
+      ::selection {
+        background: var(--green-dim);
+        color: var(--green-bright);
+      }
+
+      /* Focus */
+      :focus-visible {
+        outline: 2px solid var(--green-bright);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+
+      /* Headings */
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-sans);
+        font-weight: 700;
+        line-height: 1.2;
+        color: var(--text-bright);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+        transition: color var(--transition-fast);
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* Container */
+      .container {
+        width: 100%;
+        max-width: var(--container-max);
+        margin: 0 auto;
+        padding: 0 clamp(20px, 5vw, 40px);
+      }
+
+      /* Section titles */
+      .section-label {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--green-bright);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .section-label::before {
+        content: '//';
+        color: var(--text-muted);
+      }
+      .section-label::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 1px;
+        background: var(--green-bright);
+        opacity: 0.4;
+      }
+
+      .section-title {
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 900;
+        color: var(--text-bright);
+        margin-bottom: 16px;
+      }
+
+      .section-subtitle {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        max-width: 560px;
+        line-height: 1.8;
+      }
+
+      /* Mono utility */
+      .mono {
+        font-family: var(--font-mono);
+      }
+
+      /* Glow effect */
+      .glow-text {
+        text-shadow: 0 0 20px rgba(100, 255, 218, 0.4);
+      }
+
+      /* Grid scanline texture overlay */
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image:
+          linear-gradient(rgba(100, 255, 218, 0.012) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(100, 255, 218, 0.012) 1px, transparent 1px);
+        background-size: 40px 40px;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Noise grain overlay */
+      body::after {
+        content: '';
+        position: fixed;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.35;
+      }
+
+      main {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Utility animations */
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      @keyframes pulse-glow {
+        0%, 100% { box-shadow: 0 0 10px rgba(100, 255, 218, 0.2); }
+        50% { box-shadow: 0 0 25px rgba(100, 255, 218, 0.5), 0 0 50px rgba(100, 255, 218, 0.15); }
+      }
+
+      @keyframes scanline {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(100vh); }
+      }
+
+      .animate-slide-up {
+        animation: slideUp 0.6s ease forwards;
+      }
+
+      .animate-fade-in {
+        animation: fadeIn 0.8s ease forwards;
+      }
+
+      /* Readme Modal Styles */
+      .readme-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+      .readme-modal.show {
+        opacity: 1;
+        visibility: visible;
+      }
+      .readme-modal-backdrop {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(10, 25, 47, 0.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+      .readme-modal-window {
+        position: relative;
+        width: 90%;
+        max-width: 900px;
+        max-height: 85vh;
+        background: var(--bg-card);
+        border: 1px solid var(--border-accent);
+        border-radius: 12px;
+        box-shadow: 0 25px 80px rgba(0,0,0,0.6);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        transform: translateY(20px);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .readme-modal.show .readme-modal-window {
+        transform: translateY(0);
+      }
+      .readme-modal-window.window-maximized {
+        width: 100vw;
+        max-width: 100vw;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+        transform: translateY(0);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .readme-modal-window.window-minimized {
+        transform: translate(-45vw, 45vh) scale(0.01) !important;
+        opacity: 0;
+        border-radius: 60px;
+        transition: transform 0.6s cubic-bezier(0.5, -0.3, 0.1, 1), opacity 0.2s ease 0.4s, border-radius 0.6s ease;
+      }
+      .lab-dot { position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+      .lab-dot svg { width: 8px; height: 8px; stroke: rgba(0,0,0,0.6); stroke-width: 2; fill: none; opacity: 0; transition: opacity 0.2s ease; }
+      .lab-dot:hover svg { opacity: 1; }
+      
+      .readme-dock-pill {
+        position: fixed;
+        bottom: 24px;
+        left: 24px;
+        z-index: 10001;
+        background: var(--bg-card);
+        border: 1px solid var(--border-accent);
+        padding: 10px 16px;
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        cursor: pointer;
+        color: var(--text-bright);
+        transform: translateY(100px) scale(0.8);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .readme-dock-pill.show {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+        visibility: visible;
+      }
+      @keyframes atomicSuck {
+        0% { box-shadow: 0 0 10px var(--green-bright), 0 0 20px var(--green-bright), inset 0 0 10px var(--green-bright); border-color: var(--green-bright); transform: translateY(100px) scale(0.8); opacity: 0; }
+        50% { box-shadow: 0 0 40px var(--green-bright), 0 0 80px var(--text-bright), inset 0 0 30px var(--green-bright); border-color: var(--text-bright); transform: translateY(0) scale(1.15); opacity: 1; }
+        100% { box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-color: var(--border-accent); transform: translateY(0) scale(1); opacity: 1; }
+      }
+      .readme-dock-pill.forming {
+        animation: atomicSuck 0.6s ease-out forwards;
+        visibility: visible;
+      }
+      .dock-icon-wrapper { color: var(--green-bright); display: flex; align-items: center; }
+      .lab-terminal-header {
+        display: grid;
+        grid-template-columns: 80px 1fr 80px;
+        align-items: center;
+        padding: 12px 18px;
+        background: var(--bg-elevated);
+        border-bottom: 1px solid var(--border-subtle);
+      }
+      .lab-terminal-title {
+        text-align: center;
+        width: 100%;
+      }
+      .readme-modal-content-wrapper {
+        padding: 40px;
+        overflow-y: auto;
+        color: var(--text-secondary);
+        font-family: var(--font-sans);
+        line-height: 1.7;
+      }
+
+      /* Markdown styling overrides */
+      .markdown-body { font-size: 0.95rem; }
+      .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 {
+        color: var(--text-bright);
+        margin-top: 1.5em;
+        margin-bottom: 0.8em;
+      }
+      .markdown-body h1 { font-size: 2em; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.3em; color: var(--green-bright); }
+      .markdown-body h2 { font-size: 1.5em; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.3em; }
+      .markdown-body p { margin-bottom: 1em; }
+      .markdown-body a { color: var(--green-bright); text-decoration: none; }
+      .markdown-body a:hover { text-decoration: underline; }
+      .markdown-body pre { background: var(--bg-void); padding: 16px; border-radius: 6px; overflow-x: auto; margin-bottom: 1em; border: 1px solid var(--border-subtle); }
+      .markdown-body code { font-family: var(--font-mono); font-size: 0.85em; background: var(--bg-void); padding: 0.2em 0.4em; border-radius: 3px; color: var(--green-bright); }
+      .markdown-body pre code { background: transparent; padding: 0; color: inherit; }
+      .markdown-body blockquote { border-left: 4px solid var(--green-bright); padding-left: 1em; color: var(--text-muted); margin-left: 0; }
+      .markdown-body ul, .markdown-body ol { margin-left: 1.5em; margin-bottom: 1em; }
+      .markdown-body li { margin-bottom: 0.25em; }
+      .markdown-body table { width: 100%; border-collapse: collapse; margin-bottom: 1em; }
+      .markdown-body th, .markdown-body td { border: 1px solid var(--border-subtle); padding: 8px 12px; }
+      .markdown-body th { background: var(--bg-elevated); }
+
+      .readme-loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        padding: 80px 0;
+        color: var(--green-bright);
+      }
+      @keyframes spin { 100% { transform: rotate(360deg); } }
+      .loading-spinner { animation: spin 2s linear infinite; }
+    </style>
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      // Scroll reveal animation observer
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in');
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      // Select elements to animate on scroll
+      document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('section > .container > header, .lab-card, .stack-card, .timeline-item');
+        sections.forEach(sec => {
+          sec.style.opacity = '0';
+          sec.style.transform = 'translateY(30px)';
+          sec.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+          observer.observe(sec);
+        });
+
+
+        const modal = document.getElementById('readme-modal');
+        if (modal) {
+          // Extraer el modal de su contexto local para sobreponerse al Header global
+          document.body.appendChild(modal);
+        }
+        
+        const modalContent = document.getElementById('readme-modal-content');
+        const modalWindow = modal ? modal.querySelector('.readme-modal-window') : null;
+        const closeBtns = document.querySelectorAll('.js-modal-close');
+        const readBtns = document.querySelectorAll('.js-open-readme');
+        const maximizeBtn = document.querySelector('.js-modal-maximize');
+        const minimizeBtn = document.querySelector('.js-modal-minimize');
+        
+        const dockPill = document.getElementById('readme-dock-pill');
+        if (dockPill) {
+          document.body.appendChild(dockPill);
+        }
+
+        const loadingHTML = `
+          <div class="readme-loading">
+            <svg class="loading-spinner" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>
+            <span class="mono">Conectando con GitHub...</span>
+          </div>
+        `;
+
+        function openModal(url) {
+          if (!modal || !modalContent) return;
+          modal.classList.add('show');
+          document.body.style.overflow = 'hidden';
+          if(dockPill) dockPill.classList.remove('show');
+          
+          if (!url) {
+            modalContent.innerHTML = '<div style="text-align:center; padding: 80px 0;"><h3 style="color:var(--text-bright);">Documentación Privada</h3><p>Este laboratorio aún no tiene un repositorio público asociado.</p></div>';
+            return;
+          }
+
+          modalContent.innerHTML = loadingHTML;
+          
+          fetch(url)
+            .then(response => {
+              if (!response.ok) throw new Error('Network response was not ok');
+              return response.text();
+            })
+            .then(text => {
+
+              modalContent.innerHTML = marked.parse(text);
+            })
+            .catch(error => {
+              modalContent.innerHTML = '<div style="text-align:center; padding: 80px 0;"><h3 style="color:#ff5f57;">Error de conexión</h3><p>No se pudo obtener el README del repositorio.</p></div>';
+            });
+        }
+
+        function closeModal() {
+          if (!modal) return;
+          modal.classList.remove('show');
+          if(modalWindow) modalWindow.classList.remove('window-maximized');
+          document.body.style.overflow = '';
+        }
+
+
+        if (maximizeBtn && modalWindow) {
+          maximizeBtn.addEventListener('click', () => {
+            modalWindow.classList.toggle('window-maximized');
+          });
+        }
+
+
+        if (minimizeBtn && modalWindow) {
+          minimizeBtn.addEventListener('click', () => {
+            modalWindow.classList.add('window-minimized');
+            if(dockPill) {
+               dockPill.classList.remove('show');
+               dockPill.classList.add('forming');
+            }
+            
+
+            setTimeout(() => {
+              modal.classList.remove('show');
+              modalWindow.classList.remove('window-minimized'); // reset
+              if(dockPill) {
+                 dockPill.classList.remove('forming');
+                 dockPill.classList.add('show');
+              }
+              document.body.style.overflow = ''; // allow scroll since modal is gone
+            }, 600);
+          });
+        }
+
+
+        if (dockPill) {
+          dockPill.addEventListener('click', () => {
+            dockPill.classList.remove('show');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+          });
+        }
+
+        readBtns.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = btn.getAttribute('data-readme-url');
+            openModal(url);
+          });
+        });
+
+        closeBtns.forEach(btn => btn.addEventListener('click', closeModal));
+      });
+    </script>
+  </body>
+</html>

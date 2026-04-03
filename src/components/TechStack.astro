@@ -1,0 +1,241 @@
+---
+// TechStack.astro — Dominio técnico categorizado
+const stackGroups = [
+  {
+    title: "Sistemas Operativos",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>`,
+    items: [
+      { name: "Fedora Linux", level: "Avanzado" },
+      { name: "Ubuntu Server", level: "Avanzado" },
+      { name: "Windows Server", level: "Intermedio" },
+      { name: "Debian Server", level: "Avanzado" }
+    ]
+  },
+  {
+    title: "Redes & Seguridad",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>`,
+    items: [
+      { name: "TCP/IP & Routing", level: "Avanzado" },
+      { name: "VLANs & Switching", level: "Avanzado" },
+      { name: "Cloudflare WAF / DNS", level: "Avanzado" },
+      { name: "VPN (WireGuard/IPsec)", level: "Intermedio" }
+    ]
+  },
+  {
+    title: "Herramientas & Orquestación",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>`,
+    items: [
+      { name: "Docker & Compose", level: "Avanzado" },
+      { name: "Bash Scripting", level: "Avanzado" },
+      { name: "Git & CI/CD", level: "Intermedio" },
+      { name: "Obsidian (Troubleshooting)", level: "Avanzado" }
+    ]
+  }
+];
+---
+
+<section class="stack-section" id="stack" aria-labelledby="stack-title">
+  <div class="container">
+    <header class="section-header">
+      <p class="section-label" aria-hidden="true">Dominio Técnico</p>
+      <h2 class="section-title" id="stack-title">Stack & Tecnologías</h2>
+      <p class="section-subtitle">
+        Herramientas de uso diario en administración, automatización y despliegue. 
+        Fuerte enfoque en la resolución de problemas (troubleshooting) y gestión exhaustiva del conocimiento técnico.
+      </p>
+    </header>
+
+    <div class="stack-grid" role="list">
+      {stackGroups.map((group) => (
+        <article class="stack-card" role="listitem">
+          <!-- Card header -->
+          <div class="stack-card__header">
+            <div class="stack-icon" aria-hidden="true">
+              <Fragment set:html={group.icon} />
+            </div>
+            <h3 class="stack-group-title">{group.title}</h3>
+          </div>
+
+          <!-- Items array -->
+          <ul class="stack-items" aria-label={`Tecnologías de ${group.title}`}>
+            {group.items.map((item) => (
+              <li class="stack-item">
+                <div class="item-name mono">
+                  <span class="item-bullet" aria-hidden="true"></span>
+                  {item.name}
+                </div>
+                <div class="item-level">
+                  <div class={`level-bar level-bar--${item.level.toLowerCase()}`} aria-label={`Nivel: ${item.level}`}></div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+    
+    <!-- Decorative bottom terminal output -->
+    <div class="stack-terminal-footer" aria-hidden="true">
+      <span class="term-dim">$ apt-get install</span> <span class="term-bright">knowledge base</span> <span class="term-cursor">_</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .stack-section {
+    padding: var(--section-padding) 0;
+    position: relative;
+    background: transparent;
+  }
+
+  .section-header {
+    margin-bottom: 56px;
+  }
+
+  /* Grid */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+
+  /* Card */
+  .stack-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 30px;
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stack-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--green-bright);
+    transition: width var(--transition-normal);
+  }
+
+  .stack-card:hover {
+    border-color: var(--border-accent);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  .stack-card:hover::after {
+    width: 100%;
+  }
+
+  .stack-card__header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed var(--border-subtle);
+  }
+
+  .stack-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--bg-elevated);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--green-bright);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .stack-group-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin: 0;
+  }
+
+  /* Items */
+  .stack-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .stack-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .item-name {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .item-bullet {
+    width: 6px;
+    height: 6px;
+    background: var(--text-muted);
+    border-radius: 50%;
+    transition: background var(--transition-fast);
+  }
+
+  .stack-card:hover .item-bullet {
+    background: var(--green-bright);
+    box-shadow: 0 0 6px var(--green-bright);
+  }
+
+  /* Level indicator */
+  .item-level {
+    height: 4px;
+    background: var(--bg-elevated);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    margin-left: 16px;
+  }
+
+  .level-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green-dim), var(--green-bright));
+    border-radius: 2px;
+  }
+
+  .level-bar--avanzado {
+    width: 90%;
+  }
+  
+  .level-bar--intermedio {
+    width: 65%;
+  }
+
+  /* Terminal footer decoration */
+  .stack-terminal-footer {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    padding: 20px;
+    border-top: 1px solid var(--border-subtle);
+    opacity: 0.7;
+  }
+
+  .term-dim { color: var(--text-muted); }
+  .term-bright { color: var(--text-secondary); }
+  .term-cursor { color: var(--green-bright); animation: blink 1s step-end infinite; }
+
+  @media (max-width: 640px) {
+    .stack-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

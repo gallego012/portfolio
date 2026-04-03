@@ -1,0 +1,280 @@
+---
+---
+---
+
+<section class="experience-section" id="experiencia" aria-labelledby="experience-title">
+  <div class="container">
+    <header class="section-header">
+      <p class="section-label" aria-hidden="true">Trayectoria</p>
+      <h2 class="section-title" id="experience-title">Formación & Experiencia</h2>
+      <p class="section-subtitle">
+        Combinando formación técnica oficial con experiencia operativa integral en despliegues reales, administración de servidores e infraestructura web.
+      </p>
+    </header>
+
+    <div class="timeline" role="list">
+
+
+      <article class="timeline-item" role="listitem">
+        <div class="timeline-marker" aria-hidden="true">
+          <div class="marker-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+            </svg>
+          </div>
+          <div class="marker-line"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-period mono">2024 — Actualidad</span>
+            <span class="timeline-badge">Formación Activa</span>
+          </div>
+          <h3 class="timeline-role">Técnico en Sistemas Microinformáticos y Redes (SMR)</h3>
+          <p class="timeline-org">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            Ciclo Formativo Grado Medio · Turno Tarde
+          </p>
+          <p class="timeline-description">
+            Formación técnica avanzada orientada a entornos de producción real: administración de sistemas Windows Server y GNU/Linux, configuración de infraestructura de red (switching, routing, VLANs), gestión de Active Directory, y primeros pasos en seguridad perimetral. Énfasis en la documentación técnica como estándar profesional.
+          </p>
+          <ul class="timeline-skills" aria-label="Competencias adquiridas">
+            <li class="skill-chip">Redes TCP/IP</li>
+            <li class="skill-chip">Active Directory</li>
+            <li class="skill-chip">GNU/Linux Admin</li>
+            <li class="skill-chip">Windows Server</li>
+            <li class="skill-chip">VLANs & Switching</li>
+            <li class="skill-chip">Documentación Técnica</li>
+          </ul>
+        </div>
+      </article>
+
+
+
+      <!-- Timeline item 3: Proyectos web -->
+      <article class="timeline-item" role="listitem">
+        <div class="timeline-marker" aria-hidden="true">
+          <div class="marker-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-period mono">2026</span>
+            <span class="timeline-badge timeline-badge--dev">Proyecto Freelance</span>
+          </div>
+          <h3 class="timeline-role">Desarrollo Web & Seguridad Perimetral</h3>
+          <p class="timeline-org">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <a href="https://farmaciavillanuevadelatorre.com" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--green-bright)'" onmouseout="this.style.color='inherit'">Farmacia Villanueva de la Torre</a>
+          </p>
+          <p class="timeline-description">
+            Implementación completa de presencia corporativa digital. Diseño y desarrollo de la página web desde cero. Gestión integral de infraestructura de red empleando Cloudflare como DNS autoritativo. Configuración de seguridad perimetral mediante políticas personalizadas de WAF (Web Application Firewall), aprovisionamiento y despliegue del host en Raiola Networks, e integración de herramientas de analítica web para monitorización de tráfico.
+          </p>
+          <ul class="timeline-skills" aria-label="Competencias en desarrollo e infraestructura web">
+            <li class="skill-chip">Desarrollo Web</li>
+            <li class="skill-chip">Cloudflare DNS</li>
+            <li class="skill-chip">WAF Rules</li>
+            <li class="skill-chip">Analítica Web</li>
+            <li class="skill-chip">Raiola Networks</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .experience-section {
+    padding: var(--section-padding) 0;
+    position: relative;
+  }
+
+  .section-header {
+    margin-bottom: 64px;
+  }
+
+  /* Timeline */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    max-width: 800px;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 0 24px;
+    position: relative;
+  }
+
+  /* Marker */
+  .timeline-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .marker-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--bg-surface);
+    border: 2px solid var(--border-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--green-bright);
+    flex-shrink: 0;
+    transition: all var(--transition-normal);
+    box-shadow: 0 0 0 rgba(100, 255, 218, 0);
+    z-index: 1;
+  }
+
+  .timeline-item:hover .marker-icon {
+    border-color: var(--green-bright);
+    background: var(--green-dim);
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.2);
+  }
+
+  .marker-line {
+    width: 2px;
+    flex: 1;
+    background: linear-gradient(to bottom, var(--border-accent), transparent);
+    margin: 0 auto;
+    min-height: 60px;
+  }
+
+  /* Content */
+  .timeline-content {
+    padding-bottom: 60px;
+  }
+
+  .timeline-item:last-child .timeline-content {
+    padding-bottom: 0;
+  }
+
+  .timeline-meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  .timeline-period {
+    font-size: 0.82rem;
+    color: var(--green-bright);
+    letter-spacing: 0.05em;
+  }
+
+  .timeline-badge {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: rgba(100, 255, 218, 0.1);
+    color: var(--green-bright);
+    border: 1px solid rgba(100, 255, 218, 0.25);
+    letter-spacing: 0.05em;
+  }
+
+  .timeline-badge--ops {
+    background: rgba(255, 165, 0, 0.1);
+    color: #ffa500;
+    border-color: rgba(255, 165, 0, 0.25);
+  }
+
+  .timeline-badge--dev {
+    background: rgba(0, 128, 255, 0.1);
+    color: #60a5fa;
+    border-color: rgba(0, 128, 255, 0.25);
+  }
+
+  .timeline-role {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .timeline-org {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .timeline-description {
+    font-size: 0.97rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 20px;
+    max-width: 640px;
+  }
+
+  .timeline-description strong {
+    color: var(--green-bright);
+    font-weight: 500;
+  }
+
+  /* Skill chips */
+  .timeline-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+  }
+
+  .skill-chip {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    padding: 4px 12px;
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    letter-spacing: 0.03em;
+    transition: all var(--transition-fast);
+  }
+
+  .skill-chip:hover {
+    color: var(--green-bright);
+    border-color: var(--border-accent);
+    background: var(--green-dim);
+  }
+
+  @media (max-width: 640px) {
+    .timeline-item {
+      grid-template-columns: 44px 1fr;
+      gap: 0 16px;
+    }
+
+    .marker-icon {
+      width: 44px;
+      height: 44px;
+    }
+
+    .timeline-role {
+      font-size: 1.1rem;
+    }
+  }
+</style>
